@@ -40,5 +40,17 @@ public class UserDTO {
         user.setGender(this.gender);
         return user;
     }
+
+    public User updateUser(User user) {
+        if(isNotNull(firstName)) user.setFirstName(firstName);
+        if(isNotNull(lastName)) user.setLastName(lastName);
+        if(isNotNull(email)) user.setEmail(email);
+        if(isNotNull(gender)) user.setGender(gender);
+        return user;
+    }
+
+    private Boolean isNotNull(Object value) {
+        return value != null;
+    }
     
 }

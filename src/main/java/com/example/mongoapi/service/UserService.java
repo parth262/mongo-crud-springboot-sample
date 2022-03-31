@@ -59,14 +59,11 @@ public class UserService {
     }
 
     public Mono<User> updateUser(String id, UserDTO userDTO) {
-        return userRepository.existsById(id)
-            .flatMap(exists -> {
-                if(!exists) {
-                    throw new UserNotFoundException();
-                }
-                User user = userDTO.getUser();
-                return userRepository.save(user);
-            });
+        return userRepository.findById(id)
+            .flatMap(existingUser -> {
+                User updatedUser = userDTO.updateUser(existingUser);
+                return userRepository.save(updatedUser);
+            }).switchIfEmpty(Mono.error(UserNotFoundException::new));
     }
 
     private boolean isDev() {
