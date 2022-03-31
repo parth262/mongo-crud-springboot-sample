@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
     
     @GetMapping("/users/{id}")
-    public Mono<User> getUser(@PathVariable Long id) {
+    public Mono<User> getUser(@PathVariable String id) {
         return userService.getUserById(id);
     }
 
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    public Mono<Long> deleteUser(@PathVariable Long id) {
+    public Mono<String> deleteUser(@PathVariable String id) {
         return userService.deleteUserById(id);
     }
 
@@ -47,7 +47,7 @@ public class UserController {
 
     @PutMapping("/users/{id}")
     public Mono<User> updateUser(
-        @PathVariable Long id,
+        @PathVariable String id,
         @RequestBody UserDTO userDTO
     ) {
         return userService.updateUser(id, userDTO);

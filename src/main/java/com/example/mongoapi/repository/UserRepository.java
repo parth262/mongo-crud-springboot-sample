@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface UserRepository extends ReactiveMongoRepository<User, Long> {
+public interface UserRepository extends ReactiveMongoRepository<User, String> {
     
     public Mono<Boolean> existsByEmail(String email);
 

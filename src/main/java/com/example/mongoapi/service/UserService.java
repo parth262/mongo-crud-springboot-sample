@@ -32,7 +32,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Mono<User> getUserById(Long id) {
+    public Mono<User> getUserById(String id) {
         return userRepository.findById(id)
             .switchIfEmpty(Mono.error(new UserNotFoundException()));
     }
@@ -41,7 +41,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Mono<Long> deleteUserById(Long id) {
+    public Mono<String> deleteUserById(String id) {
         return userRepository.deleteById(id)
             .thenReturn(id)
             .switchIfEmpty(Mono.error(new UserNotFoundException()));
@@ -58,7 +58,7 @@ public class UserService {
             });
     }
 
-    public Mono<User> updateUser(Long id, UserDTO userDTO) {
+    public Mono<User> updateUser(String id, UserDTO userDTO) {
         return userRepository.existsById(id)
             .flatMap(exists -> {
                 if(!exists) {
