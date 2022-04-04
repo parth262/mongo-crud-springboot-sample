@@ -30,6 +30,14 @@ spec:
           - name: MONGO_SERVER
             value: mongo-server
           - name: MONGO_USER
-            value: user
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: username
+                optional: false
           - name: MONGO_PASS
-            value: user
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: password
+                optional: false

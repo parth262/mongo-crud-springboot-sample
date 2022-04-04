@@ -24,6 +24,14 @@ spec:
           name: mongo
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
-            value: user
+            # value: user
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: username
           - name: MONGO_INITDB_ROOT_PASSWORD
-            value: user
+            # value: user
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: password
