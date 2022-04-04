@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-server
+  template:
+    metadata:
+      labels:
+        app: mongo-server
+    spec:
+      containers:
+      - name: mongo-server
+        image: mongo
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        ports:
+        - containerPort: 27017
+          name: mongo
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: user
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: user
